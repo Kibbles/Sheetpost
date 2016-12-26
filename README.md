@@ -28,6 +28,7 @@ To sheetpost:
 ```
 sheetpost.py put [GSheets key from URL] [Input filename]
 ```
+This will delete all reviously existing content in the target sheet.
 
 To retrieve a sheetpost:
 ```
