@@ -27,7 +27,7 @@ On line 16 in sheetpost.py, edit the following value:
 json_file = '[your file here].json'
 ```
 
-Additionally, you'll need to spoonfeed it a blank Google Sheet to start off with (via key, which is found in the URL when opening the spreadsheet in a browser), and that blank sheet must be "shared" with the service account you created so the program can write to it.
+Additionally, you'll need to spoonfeed it a Google Sheet to start off with (via key, which is found in the URL when opening the spreadsheet in a browser), and that blank sheet must be "shared" with the service account you created (so the program can write to it).
 
 ## Usage
 
