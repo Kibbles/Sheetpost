@@ -113,7 +113,7 @@ To retrieve a sheetpost:
 # -------------------------------------------------------]]
 # Where the magic happens!
 # -------------------------------------------------------]]
-if len(argv) <= 2:
+if len(argv) < 4:
     print "Too few arguments!"
     exit(help_message)
 
