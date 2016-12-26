@@ -41,25 +41,39 @@ def sheetpost_put(sheet_id, filename):
     # UU-encode the source file
     uu.encode(filename, filename + ".out")
 
-    print "Encoded file into uu format! Starting the upload.\nThis'll take a while."
+    print "Encoded file into uu format!"
 
     with open(filename + ".out", "rb") as uploadfile:
         encoded = uploadfile.read()
     uploadfile.close()
 
     # Wipe the sheet of existing content.
-    cell_sweep = 1
-    while wks.cell(cell_sweep, 1).value != "":
-        wks.update_cell(cell_sweep, 1, '')
-        cell_sweep += 1
+    print "Wiping the existing data from the sheet."
+    row_sweep = 1
+    column_sweep = 1
+    while wks.cell(row_sweep, column_sweep).value != "":
+        if row_sweep == 1000:
+            row_sweep = 1
+            column_sweep += 1
+        print row_sweep
+        print column_sweep
+        wks.update_cell(row_sweep, column_sweep, "")
+        row_sweep += 1
 
     # Write the chunks to Drive
     cell = 1
+    column = 1
     chunk = chunk_str(encoded, 49500)
 
+    print "Writing the chunks to the sheet. This'll take a while. Get some coffee or something."
     for part in chunk:
+        if cell == 1000:
+            print "Ran out of rows, adding a column."
+            cell = 1
+            column += 1
+        # Add a ' to each line to avoid it being interpreted as a formula
         part = "'" + part
-        wks.update_cell(cell, 1, part)
+        wks.update_cell(cell, column, part)
         cell += 1
 
     # Delete the UU-encoded file
@@ -80,18 +94,29 @@ def sheetpost_get(sheet_id, filename):
         wks = gc.open_by_key(sheet_id).sheet1
         print "Logged into Sheets! Downloading the UU spaghetti. This might take a bit."
     except Exception:
-        exit("Error logging into Google Sheets.\n Check your authentication and make sure you"
-                 "gave it a sheetpost to work with.")
+        exit("Error logging into Google Sheets.\n Check your authentication and make sure you gave it a "
+             "sheetpost to work with.")
+
+    row_sweep = 1
+    column_sweep = 1
+    values_list = []
+    values_final = []
 
     # Trim out the extra single quotes
-    values_list = wks.col_values(1)
-    for value in values_list:
-        value = value[1:]
-    values_list = "".join(values_list)
+    while wks.cell(row_sweep, column_sweep).value != "":
+        values_list = wks.col_values(column_sweep)
+        for value in values_list:
+            if row_sweep > 1:
+                value = value[1:]
+            values_final += value
+            print value
+            column_sweep += 1
+        values_final = "".join(values_final)
+        print values_final
 
     # Save to file
-    with open(downfile, "w") as recoverfile:
-        recoverfile.write(values_list)
+    with open(downfile, "w+") as recoverfile:
+        recoverfile.write(values_final)
     recoverfile.close()
 
     print "Saved Sheets data to decode! Decoding now. Beep boop."
