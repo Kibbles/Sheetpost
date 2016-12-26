@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import uu
 import gspread
 from sys import argv, exit
