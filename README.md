@@ -34,6 +34,14 @@ To retrieve a sheetpost:
 sheetpost.py get [GSheets key from URL] [Output filename]
 ```
 
+Example:
+
+```
+sheetpost.py put 1cagGaHFBk5rFjJ6klMRwdVsUvTgslWtg9x8B-rz5C-I "C:\potato\potato.png"
+
+sheetpost.py get 1cagGaHFBk5rFjJ6klMRwdVsUvTgslWtg9x8B-rz5C-I "C:\potato\reassembled_potato.png"
+```
+
 Note that sheetpost has no idea what format your files actually are, so you'll have to somehow remember what each sheetpost contains.
 
 You could use a spreadsheet to keep track of that.
