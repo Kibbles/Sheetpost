@@ -55,8 +55,6 @@ def sheetpost_put(sheet_id, filename):
         if row_sweep == 1000:
             row_sweep = 1
             column_sweep += 1
-        print row_sweep
-        print column_sweep
         wks.update_cell(row_sweep, column_sweep, "")
         row_sweep += 1
 
@@ -109,10 +107,8 @@ def sheetpost_get(sheet_id, filename):
             if row_sweep > 1:
                 value = value[1:]
             values_final += value
-            print value
             column_sweep += 1
         values_final = "".join(values_final)
-        print values_final
 
     # Save to file
     with open(downfile, "w+") as recoverfile:
