@@ -6,6 +6,12 @@
 ## WHAT
 Upload & download UU-encoded data with Google Sheets.
 
+![p1]
+
+![p2]
+
+![p3]
+
 This abomination uses [uu](http://linux.die.net/man/1/uuencode) and [gspread](https://github.com/burnash/gspread) to post single files to Google Sheets, the storage of which is free.
 You can encode videos, music, pictures and more in a hilariously inefficient manner that won't count towards your Google Drive storage space.
 
