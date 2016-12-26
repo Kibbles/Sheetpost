@@ -45,11 +45,11 @@ def sheetpost_put(sheet_id, filename):
         encoded = uploadfile.read()
     uploadfile.close()
 
-    # Wipe the sheet of existing content
-    iwalk = 1
-    while wks.cell(iwalk, 1).value != "":
-        wks.update_cell(iwalk, 1, '')
-        iwalk += 1
+    # Wipe the sheet of existing content.
+    cell_sweep = 1
+    while wks.cell(cell_sweep, 1).value != "":
+        wks.update_cell(cell_sweep, 1, '')
+        cell_sweep += 1
 
     # Write the chunks to Drive
     cell = 1
