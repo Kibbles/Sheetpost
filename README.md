@@ -1,5 +1,7 @@
 # Sheetpost
-
+[p1]: https://github.com/Kibbles/Sheetpost/blob/master/screenshots/p1.png
+[p2]: https://github.com/Kibbles/Sheetpost/blob/master/screenshots/p2.png
+[p3]: https://github.com/Kibbles/Sheetpost/blob/master/screenshots/p3.png
 
 ## WHAT
 Upload & download UU-encoded data with Google Sheets.
