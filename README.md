@@ -12,7 +12,7 @@ Upload & download UU-encoded data with Google Sheets.
 
 ![p3]
 
-This abomination uses [uu](http://linux.die.net/man/1/uuencode) and [gspread](https://github.com/burnash/gspread) to post single files to Google Sheets. You can encode videos, music, pictures and more in a hilariously inefficient manner that won't count towards your Google Drive storage space.
+This abomination uses [uu](http://linux.die.net/man/1/uuencode) and [gspread](https://github.com/burnash/gspread) to post single files to Google Sheets. You can encode videos, music, pictures and more in a hilariously inefficient manner that won't count towards your Google Drive storage space. There is no size limit I am aware of; the largest file I tested it with was 200MB.
 
 Uploading takes forever, but downloading is surprisingly snappy.
 
@@ -58,7 +58,7 @@ You could use a spreadsheet to keep track of that.
 ## Quirks
 - Uploading is slow. A 5MB file takes roughly ~3 minutes. Download is a lot faster though!
 - It doesn't support multiple files, but you can upload a .zip or .7z archive.
-- Google Sheets has a hardcoded character limit of 50,000 per cell. Sheetpost utilizes 45,000 character per cell, just to be safe. You can probably tweak this and gain some more "performance".
+- Google Sheets has a hardcoded character limit of 50,000 per cell. Sheetpost utilizes 49,500 character per cell, just to be safe. You can probably tweak this and gain some more "performance".
 - Sheets interprets a cell starting with "=" as a formula. To combat this, Sheetpost prepends every single line with a single quote (').
 This is stupid, but it works. The `get` mode consequently trims out the first single quote per cell when reassembling the file.
 - If you open your Sheet in a browser after an upload, it ~~might~~ *WILL* vomit blood.
