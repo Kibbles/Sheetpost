@@ -12,7 +12,7 @@ Upload & download UU-encoded data with Google Sheets.
 
 ![p3]
 
-This abomination uses [uu](http://linux.die.net/man/1/uuencode) and [gspread](https://github.com/burnash/gspread) to post single files to Google Sheets. You can encode videos, music, pictures and more in a hilariously inefficient manner that won't count towards your Google Drive storage space. There is no size limit I am aware of; the largest file I tested it with was 200MB.
+This abomination uses [uu](http://linux.die.net/man/1/uuencode) and [gspread](https://github.com/burnash/gspread) to post single files to Google Sheets. You can encode videos, music, pictures and more in a hilariously inefficient manner that won't count towards your Google Drive storage space. The size limit is determined by Google Sheet's hard cap of 400,000 cells, which is ~19.8 GB of UU-encoded data at 49,500 characters (or bytes) per cell.
 
 Uploading takes forever, but downloading is surprisingly snappy.
 
