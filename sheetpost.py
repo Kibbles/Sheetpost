@@ -9,6 +9,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 # -------------------------------------------------------]]
 # Authentication files & configuration.
 # Be sure to replace your own json file name here.
+# See here for details:
+# https://gspread.readthedocs.io/en/latest/oauth2.html
 # -------------------------------------------------------]]
 
 # Insert the path & name of your own .json auth file here.
