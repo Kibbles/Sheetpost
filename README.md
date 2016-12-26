@@ -40,8 +40,8 @@ You could use a spreadsheet to keep track of that.
 
 
 ## Quirks
-- Uploading is slow, but this is a consequence of hammering the API with this garbage. Don't complain, it's free storage!
+- Uploading is slow. A 5MB file takes roughly ~3 minutes.
 - Google Sheets has a hardcoded character limit of 50,000 per cell. Sheetpost utilizes 45,000 character per cell, just to be safe. You can probably tweak this and gain some more "performance".
 - Sheets interprets a cell starting with "=" as a formula. To combat this, Sheetpost prepends every single line with a single quote (').
-This is stupid, and it works. The `-get` mode consequently trims out the first single quote per cell when reassembling the file.
-- If you open your Sheet in a browser, it might vomit blood.
+This is stupid, but it works. The `get` mode consequently trims out the first single quote per cell when reassembling the file.
+- If you open your Sheet in a browser, it ~~might~~ *WILL* vomit blood.
