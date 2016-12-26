@@ -4,7 +4,7 @@
 ## WHAT
 Post UU-encoded files to Google Sheets.
 
-This abomination uses [uu](http://linux.die.net/man/1/uuencode) and [Gspread](https://github.com/burnash/gspread) to post data to Google Sheets, the storage of which is free.
+This abomination uses [uu](http://linux.die.net/man/1/uuencode) and [gspread](https://github.com/burnash/gspread) to post data to Google Sheets, the storage of which is free.
 You can encode videos, music, pictures and more in a hilariously inefficient manner that won't count towards your Google Drive storage space.
 
 Uploading takes forever, but downloading is surprisingly snappy.
@@ -13,7 +13,7 @@ Uploading takes forever, but downloading is surprisingly snappy.
 Why not!
 
 ## Setup
-Gspread requires valid Drive API credentials for use in OAuth2. [Here's how to do this](https://gspread.readthedocs.io/en/latest/oauth2.html).
+gspread requires valid Drive API credentials for use in OAuth2. [Here's how to do this](https://gspread.readthedocs.io/en/latest/oauth2.html).
 
 On line 16 in sheetpost.py, edit the following value:
 ```
@@ -34,7 +34,7 @@ To retrieve a sheetpost:
 sheetpost.py get [GSheets key from URL] [Output filename]
 ```
 
-Note that sheetpost has no idea what format or size your files actually are, so you'll have to somehow remember what each worksheet contains.
+Note that sheetpost has no idea what format your files actually are, so you'll have to somehow remember what each sheetpost contains.
 
 You could use a spreadsheet to keep track of that.
 
