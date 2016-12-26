@@ -1,21 +1,19 @@
 import uu
 import gspread
-import sys
-import os
+from sys import argv, exit
+from os import remove
 from oauth2client.service_account import ServiceAccountCredentials
 
 
 # AUTH
 # -------------------------------------------------------]]
-# Authentication files & fluff.
-# Be sure to replace your own json file name below.
-# See here for details:
-# https://gspread.readthedocs.io/en/latest/oauth2.html
+# Authentication files & configuration.
+# Be sure to replace your own json file name here.
 # -------------------------------------------------------]]
 
 # Insert the path & name of your own .json auth file here.
 # This is the only thing you need to edit in the script itself.
-json_file = '[your file here].json'
+json_file = '[your file].json'
 scope = ['https://spreadsheets.google.com/feeds']
 credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file, scope)
 
@@ -33,11 +31,10 @@ def chunk_str(bigchunk, chunk_size):
 def sheetpost_put(sheet_id, filename):
     try:
         gc = gspread.authorize(credentials)
+        wks = gc.open_by_key(sheet_id).sheet1
         print "Logged into Sheets!"
     except Exception:
-        sys.exit("Error logging into Google Sheets. Check your authentication.")
-
-    # Set a name and path for your to-be-uploaded file
+        exit("Error logging into Google Sheets. Check your authentication.")
 
     # UU-encode the source file
     uu.encode(filename, filename + ".out")
@@ -48,10 +45,15 @@ def sheetpost_put(sheet_id, filename):
         encoded = uploadfile.read()
     uploadfile.close()
 
+    # Wipe the sheet of existing content
+    iwalk = 1
+    while wks.cell(iwalk, 1).value != "":
+        wks.update_cell(iwalk, 1, '')
+        iwalk += 1
+
     # Write the chunks to Drive
     cell = 1
-    chunk = chunk_str(encoded, 45000)
-    wks = gc.open_by_key(sheet_id).sheet1
+    chunk = chunk_str(encoded, 49500)
 
     for part in chunk:
         part = "'" + part
@@ -59,7 +61,7 @@ def sheetpost_put(sheet_id, filename):
         cell += 1
 
     # Delete the UU-encoded file
-    os.remove(filename + ".out")
+    remove(filename + ".out")
     print "All done! " + str(cell) + " cells filled in Sheets."
 
 
@@ -76,7 +78,7 @@ def sheetpost_get(sheet_id, filename):
         wks = gc.open_by_key(sheet_id).sheet1
         print "Logged into Sheets! Downloading the UU spaghetti. This might take a bit."
     except Exception:
-        sys.exit("Error logging into Google Sheets.\n Check your authentication and make sure you"
+        exit("Error logging into Google Sheets.\n Check your authentication and make sure you"
                  "gave it a sheetpost to work with.")
 
     # Trim out the extra single quotes
@@ -92,8 +94,9 @@ def sheetpost_get(sheet_id, filename):
 
     print "Saved Sheets data to decode! Decoding now. Beep boop."
     uu.decode(downfile, filename)
-    os.remove(downfile)
+    remove(downfile)
     print "Data decoded! All done!"
+
 
 # HELP
 # -------------------------------------------------------]]
@@ -110,19 +113,19 @@ To retrieve a sheetpost:
 # -------------------------------------------------------]]
 # Where the magic happens!
 # -------------------------------------------------------]]
-if len(sys.argv) <= 2:
+if len(argv) <= 2:
     print "Too few arguments!"
-    sys.exit(help_message)
+    exit(help_message)
 
-sheet_id = str(sys.argv[2])
-filename = str(sys.argv[3])
+sheet_id = str(argv[2])
+filename = str(argv[3])
 
-if sys.argv[1] == "put":
+if argv[1] == "put":
     sheetpost_put(sheet_id, filename)
 
-elif sys.argv[1] == "get":
+elif argv[1] == "get":
     sheetpost_get(sheet_id, filename)
 
 else:
     print "Unknown operation (accepts either 'get' or 'put')"
-    sys.exit(help_message)
+    exit(help_message)
