@@ -48,7 +48,7 @@ You could use a spreadsheet to keep track of that.
 
 
 ## Quirks
-- Uploading is slow. A 5MB file takes roughly ~3 minutes.
+- Uploading is slow. A 5MB file takes roughly ~3 minutes. Download is a lot faster though!
 - It doesn't support multiple files, but you can upload a .zip or .7z archive.
 - Google Sheets has a hardcoded character limit of 50,000 per cell. Sheetpost utilizes 45,000 character per cell, just to be safe. You can probably tweak this and gain some more "performance".
 - Sheets interprets a cell starting with "=" as a formula. To combat this, Sheetpost prepends every single line with a single quote (').
