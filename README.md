@@ -22,7 +22,8 @@ Why not!
 ## Setup
 You'll need gspread and oauth2client.
 ```pip install gspread
-pip install oauth2client``
+
+pip install oauth2client```
 
 gspread requires valid Drive API credentials for use in OAuth2. [Here's how to do this](https://gspread.readthedocs.io/en/latest/oauth2.html).
 
