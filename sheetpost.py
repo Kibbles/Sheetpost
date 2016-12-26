@@ -13,7 +13,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 # Insert the path & name of your own .json auth file here.
 # This is the only thing you need to edit in the script itself.
-json_file = '[your file].json'
+json_file = '[your file here].json'
 scope = ['https://spreadsheets.google.com/feeds']
 credentials = ServiceAccountCredentials.from_json_keyfile_name(json_file, scope)
 
